@@ -10,4 +10,9 @@
 
 @interface SwipeCard : UIView
 
+@property (strong, nonatomic) UILabel *testLabel;
+@property (strong, nonatomic) UIImageView *testImage;
+
+@property (strong, nonatomic) UIColor *defaultColor;
+
 @end

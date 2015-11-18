@@ -14,8 +14,10 @@
 #define DISTANCETHRESHOLD 50
 #define ANGLETHRESHOLD 50
 
+#define CARDMARGIN 20
+
 @implementation SwipeCardContainer {
-    UIView *swipeView;
+    SwipeCard *swipeView;
     CGPoint startingPoint;
     CGPoint firstPoint;
     CGPoint currentPoint;
@@ -24,13 +26,15 @@
 }
 
 -(void)didMoveToWindow {
+    
+    self.backgroundColor = [UIColor colorWithRed:255.0f/255.0f green:246.0f/255.0f blue:200.0f/255.0f alpha:1];
     // Set upVector for comparing angles against
     upVector.x = 0;
     upVector.y = 1;
     
     // Draw everything
-    swipeView = [[UIButton alloc] initWithFrame:CGRectMake(self.center.x-(VIEWWIDTH/2), self.center.y-(VIEWHEIGHT/2), VIEWWIDTH, VIEWHEIGHT)];
-    swipeView.backgroundColor = [UIColor grayColor];
+    swipeView = [[SwipeCard alloc] initWithFrame:CGRectMake(CARDMARGIN, CARDMARGIN, self.frame.size.width-(CARDMARGIN*2), self.frame.size.height-(CARDMARGIN*2))];
+    swipeView.backgroundColor = [UIColor whiteColor];
     [self addSubview:swipeView];
 }
 
@@ -53,9 +57,11 @@
     
     // Color UI elements if view is within valid zone
     if ([self viewIsWithinValidZone:swipeView]) {
+        // Add delegate method here
         swipeView.backgroundColor = [UIColor greenColor];
     } else {
-        swipeView.backgroundColor = [UIColor grayColor];
+        // Add delegate method here
+        swipeView.backgroundColor = [UIColor whiteColor];
     }
     
     // Set current point to new point
@@ -65,8 +71,10 @@
 -(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     // Check if the view is in valid zone
     if ([self viewIsWithinValidZone:swipeView]) {
+        // Add delegate method here
         NSLog(@"It's good!");
     } else {
+        // Add delegate method here
         NSLog(@"It's bad...");
     }
     
@@ -80,7 +88,7 @@
          // Reset the view
         swipeView.center = startingPoint;
         swipeView.alpha = 1;
-        swipeView.backgroundColor = [UIColor grayColor];
+        swipeView.backgroundColor = [UIColor whiteColor];
     }];
 }
 
